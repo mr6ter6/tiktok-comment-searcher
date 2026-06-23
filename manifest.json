@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+  "name": "TikTok Comment Searcher",
+  "version": "1.0.0",
+  "description": "TikTok videolarında yorumlar içinde arama yapabilmenizi sağlar.",
+  "icons": {
+    "128": "icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.tiktok.com/*"],
+      "js": ["inject.js"],
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
+      "matches": ["*://*.tiktok.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle",
+      "world": "ISOLATED"
+    }
+  ]
+}
