@@ -1,6 +1,9 @@
 (function() {
   if (document.getElementById('tiktok-comment-searcher-root')) return;
-  // ═════════════════════════════════════════════════════════
+
+  // =================================================================
+  // i18n — 12 Language Definitions
+  // =================================================================
   const LANGS = {
     en: {
       name: 'English', flag: '🇬🇧', dir: 'ltr',
@@ -31,7 +34,8 @@
       balanced: 'Balanced',
       safe: 'Safe',
       settingsNote: 'Settings are saved automatically.',
-      mainCommentsLoaded: 'All main comments loaded (replies excluded)'
+      mainCommentsLoaded: 'All main comments loaded (replies excluded)',
+      locatingComment: 'Locating comment in page...'
     },
     tr: {
       name: 'Türkçe', flag: '🇹🇷', dir: 'ltr',
@@ -62,7 +66,8 @@
       balanced: 'Dengeli',
       safe: 'Güvenli',
       settingsNote: 'Ayarlar otomatik kaydedilir.',
-      mainCommentsLoaded: 'Tüm ana yorumlar yüklendi (cevaplar hariç)'
+      mainCommentsLoaded: 'Tüm ana yorumlar yüklendi (cevaplar hariç)',
+      locatingComment: 'Yorum sayfada aranıyor...'
     },
     es: {
       name: 'Español', flag: '🇪🇸', dir: 'ltr',
@@ -93,7 +98,8 @@
       balanced: 'Equilibrado',
       safe: 'Seguro',
       settingsNote: 'La configuración se guarda automáticamente.',
-      mainCommentsLoaded: 'Comentarios principales cargados (respuestas excluidas)'
+      mainCommentsLoaded: 'Comentarios principales cargados (respuestas excluidas)',
+      locatingComment: 'Buscando comentario...'
     },
     de: {
       name: 'Deutsch', flag: '🇩🇪', dir: 'ltr',
@@ -124,7 +130,8 @@
       balanced: 'Ausgewogen',
       safe: 'Sicher',
       settingsNote: 'Einstellungen werden automatisch gespeichert.',
-      mainCommentsLoaded: 'Alle Hauptkommentare geladen (ohne Antworten)'
+      mainCommentsLoaded: 'Alle Hauptkommentare geladen (ohne Antworten)',
+      locatingComment: 'Suche Kommentar...'
     },
     fr: {
       name: 'Français', flag: '🇫🇷', dir: 'ltr',
@@ -155,7 +162,8 @@
       balanced: 'Équilibré',
       safe: 'Sûr',
       settingsNote: 'Les paramètres sont enregistrés automatiquement.',
-      mainCommentsLoaded: 'Commentaires principaux chargés (hors réponses)'
+      mainCommentsLoaded: 'Commentaires principaux chargés (hors réponses)',
+      locatingComment: 'Recherche du commentaire...'
     },
     pt: {
       name: 'Português', flag: '🇧🇷', dir: 'ltr',
@@ -174,7 +182,7 @@
       noCommentsTitle: 'Nenhum comentário carregado ainda.',
       option1: 'Opção 1: Clique em "Carga Automática" — carrega todos os comentários.',
       option2: 'Opção 2: Role para baixo na seção de comentários do TikTok.',
-      noResults: 'Nenhum comentário correspondente encontrado.',
+      noResults: 'Nenuhm comentário correspondente encontrado.',
       notFoundInPage: 'Comentário não visível, role a lista!',
       scrollHint: 'Clique para ir ao comentário',
       analysisInsufficient: 'Comentários insuficientes para análise (mín. 3).',
@@ -186,7 +194,8 @@
       balanced: 'Equilibrado',
       safe: 'Seguro',
       settingsNote: 'As configurações são salvas automaticamente.',
-      mainCommentsLoaded: 'Comentários principais carregados (respostas excluídas)'
+      mainCommentsLoaded: 'Comentários principais cargados (respostas excluídas)',
+      locatingComment: 'Localizando comentário...'
     },
     it: {
       name: 'Italiano', flag: '🇮🇹', dir: 'ltr',
@@ -217,7 +226,8 @@
       balanced: 'Bilanciato',
       safe: 'Sicuro',
       settingsNote: 'Le impostazioni vengono salvate automaticamente.',
-      mainCommentsLoaded: 'Commenti principali caricati (risposte escluse)'
+      mainCommentsLoaded: 'Commenti principali caricati (risposte escluse)',
+      locatingComment: 'Ricerca commento...'
     },
     ar: {
       name: 'العربية', flag: '🇸🇦', dir: 'rtl',
@@ -248,7 +258,8 @@
       balanced: 'متوازن',
       safe: 'آمن',
       settingsNote: 'يتم حفظ الإعدادات تلقائياً.',
-      mainCommentsLoaded: 'تم تحميل التعليقات الرئيسية (باستثناء الردود)'
+      mainCommentsLoaded: 'تم تحميل التعليقات الرئيسية (باستثناء الردود)',
+      locatingComment: 'تحديد موقع التعليق...'
     },
     ja: {
       name: '日本語', flag: '🇯🇵', dir: 'ltr',
@@ -278,8 +289,9 @@
       fast: '速い',
       balanced: 'バランス',
       safe: '安全',
-      settingsNote: '設定は自動的に保存されます。',
-      mainCommentsLoaded: 'すべてのメインコメントが読み込まれました（返信を除く）'
+      settingsNote: '設定は自动的に保存されます。',
+      mainCommentsLoaded: 'すべてのメインコメントが読み込まれました（返信を除く）',
+      locatingComment: 'コメントを探しています...'
     },
     ko: {
       name: '한국어', flag: '🇰🇷', dir: 'ltr',
@@ -310,7 +322,8 @@
       balanced: '균형',
       safe: '안전',
       settingsNote: '설정이 자동으로 저장됩니다.',
-      mainCommentsLoaded: '모든 메인 댓글 로드 완료 (답글 제외)'
+      mainCommentsLoaded: '모든 메인 댓글 로드 완료 (답글 제외)',
+      locatingComment: '댓글 위치 찾는 중...'
     },
     ru: {
       name: 'Русский', flag: '🇷🇺', dir: 'ltr',
@@ -341,7 +354,8 @@
       balanced: 'Баланс',
       safe: 'Безопасно',
       settingsNote: 'Настройки сохраняются автоматически.',
-      mainCommentsLoaded: 'Все главные комментарии загружены (без ответов)'
+      mainCommentsLoaded: 'Все главные комментарии загружены (без ответов)',
+      locatingComment: 'Поиск комментария...'
     },
     zh: {
       name: '中文', flag: '🇨🇳', dir: 'ltr',
@@ -372,13 +386,14 @@
       balanced: '平衡',
       safe: '安全',
       settingsNote: '设置会自动保存。',
-      mainCommentsLoaded: '所有主评论已加载（不含回复）'
+      mainCommentsLoaded: '所有主评论已加载（不含回复）',
+      locatingComment: '正在定位评论...'
     }
   };
 
-  // ════════════════════════════════════════════════════════════════
+  // =================================================================
   // Settings helpers — saved to localStorage
-  // ════════════════════════════════════════════════════════════════
+  // =================================================================
   function getSetting(key, fallback) {
     try { const v = localStorage.getItem('tcs_' + key); return v !== null ? v : fallback; }
     catch (e) { return fallback; }
@@ -396,9 +411,9 @@
   function t(key) { return (LANGS[currentLangCode] || LANGS['en'])[key] || key; }
   function dir() { return (LANGS[currentLangCode] || LANGS['en']).dir; }
 
-  // ════════════════════════════════════════════════════════════════
+  // =================================================================
   // State Management
-  // ════════════════════════════════════════════════════════════════
+  // =================================================================
   let commentsMap = new Map();
   let currentVideoId = '';
   let lastUrl = window.location.href;
@@ -414,9 +429,9 @@
   let lastCommentsCount = 0;
   let sameCountTicks = 0;
 
-  // ════════════════════════════════════════════════════════════════
+  // =================================================================
   // Build Shadow DOM
-  // ════════════════════════════════════════════════════════════════
+  // =================================================================
   const host = document.createElement('div');
   host.id = 'tiktok-comment-searcher-root';
   document.body.appendChild(host);
@@ -469,7 +484,6 @@
     .sb-wrap { position:relative; }
     .sb-input { width:100%; padding:11px 38px 11px 14px; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.12); border-radius:24px; color:#fff; font-size:13px; outline:none; transition:all .3s ease; }
     .sb-input:focus { background:rgba(255,255,255,.1); border-color:#00f2fe; box-shadow:0 0 10px rgba(0,242,254,.2); }
-    .sb-input.error { border-color:#fe0979!important; box-shadow:0 0 10px rgba(254,9,121,.3)!important; }
     .sb-clear { position:absolute; right:14px; top:50%; transform:translateY(-50%); font-size:17px; color:#8a8b90; cursor:pointer; display:none; }
     .sb-clear:hover { color:#fff; }
 
@@ -494,6 +508,8 @@
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.6} }
     .stats-info { font-size:9px; color:rgba(0,242,254,.85); font-weight:500; margin-top:4px; display:none; animation:fadeIn .3s ease; line-height:1.3; }
     @keyframes fadeIn { from{opacity:0;transform:translateY(-2px)} to{opacity:1;transform:translateY(0)} }
+    .sb-input.error { border-color:#fe0979!important; box-shadow:0 0 10px rgba(254,9,121,.3)!important; }
+    .sb-input.locating { border-color:#00f2fe!important; box-shadow:0 0 10px rgba(0,242,254,.3)!important; }
 
     /* Settings Panel Overlay */
     .settings-overlay {
@@ -561,99 +577,11 @@
     .empty { text-align:center; color:#8a8b90; padding:36px 18px; font-size:12px; line-height:1.7; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; }
     .empty svg { width:44px; height:44px; fill:rgba(255,255,255,.1); }
   `;
-  shadow.appendChild(style);
-
-  // ════════════════════════════════════════════════════════════════
-  // Build UI
-  // ════════════════════════════════════════════════════════════════
-  const ui = document.createElement('div');
-  ui.className = 'ec';
-  ui.innerHTML = `
-    <button class="toggle-btn" title="TikTok Comment Search">
-      <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
-    </button>
-
-    <div class="panel">
-      <!-- Settings Overlay -->
-      <div class="settings-overlay">
-        <div class="settings-header">
-          <span class="settings-title" id="settings-title"></span>
-          <button class="icon-btn" id="close-settings">✕</button>
-        </div>
-        <div class="settings-body">
-          <div>
-            <div class="settings-section-label" id="lang-label"></div>
-            <div class="lang-grid" id="lang-grid"></div>
-          </div>
-          <div>
-            <div class="settings-section-label" id="speed-label"></div>
-            <div class="speed-grid">
-              <div class="speed-item" data-speed="fast"><span class="speed-emoji">⚡</span><span id="sp-fast"></span></div>
-              <div class="speed-item" data-speed="balanced"><span class="speed-emoji">⚖️</span><span id="sp-balanced"></span></div>
-              <div class="speed-item" data-speed="safe"><span class="speed-emoji">🛡️</span><span id="sp-safe"></span></div>
-            </div>
-          </div>
-          <div class="settings-note" id="settings-note"></div>
-        </div>
-      </div>
-
-      <!-- Main Header -->
-      <div class="ph">
-        <div class="ph-title" id="panel-title"></div>
-        <button class="icon-btn" id="settings-btn" title="Settings">⚙️</button>
-        <button class="icon-btn" id="close-btn">✕</button>
-      </div>
-
-      <!-- Panel Body -->
-      <div class="pb">
-        <div class="sb-wrap">
-          <input type="text" class="sb-input" id="search-input">
-          <span class="sb-clear" id="sb-clear">×</span>
-        </div>
-
-        <div class="ctrl">
-          <div class="ctrl-row">
-            <div class="sort-grp">
-              <label id="sort-label"></label>
-              <select class="sort-sel" id="sort-sel">
-                <option value="likes" id="opt-likes"></option>
-                <option value="newest" id="opt-newest"></option>
-                <option value="oldest" id="opt-oldest"></option>
-              </select>
-            </div>
-            <div class="fbtns">
-              <button class="fbtn" id="fq"></button>
-              <button class="fbtn" id="fv"></button>
-            </div>
-          </div>
-          <div class="stats">
-            <div style="display:flex; flex-direction:column; gap:2px; flex:1; min-width:0; padding-right:8px;">
-              <div><span id="lbl-loaded"></span> <span class="sv" id="loaded-c">0</span> / <span class="sv" id="total-c">0</span></div>
-              <div class="stats-info" id="stats-info"></div>
-            </div>
-            <button class="asbtn" id="as-btn"></button>
-          </div>
-        </div>
-
-        <div class="analysis">
-          <button class="atbtn" id="analysis-btn">
-            <span id="analysis-label"></span>
-            <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
-          </button>
-          <div class="acontent" id="acontent">
-            <div class="wcloud" id="wcloud"></div>
-          </div>
-        </div>
-
-        <div class="rlist" id="rlist"></div>
-      </div>
-    </div>
-  `;
   shadow.appendChild(ui);
 
-  // ════════════════════════════════════════════════════════════════
+  // =================================================================
   // Bind elements
-  // ════════════════════════════════════════════════════════════════
+  // =================================================================
   const toggleBtn   = shadow.querySelector('.toggle-btn');
   const panel       = shadow.querySelector('.panel');
   const settingsOv  = shadow.querySelector('.settings-overlay');
@@ -675,9 +603,9 @@
   const closeSets   = shadow.querySelector('#close-settings');
   const langGrid    = shadow.querySelector('#lang-grid');
 
-  // ════════════════════════════════════════════════════════════════
+  // =================================================================
   // Localise UI strings
-  // ════════════════════════════════════════════════════════════════
+  // =================================================================
   function applyLang() {
     const isRtl = dir() === 'rtl';
     panel.classList.toggle('rtl', isRtl);
@@ -726,9 +654,9 @@
     });
   }
 
-  // ════════════════════════════════════════════════════════════════
+  // =================================================================
   // Event Listeners
-  // ════════════════════════════════════════════════════════════════
+  // =================================================================
   toggleBtn.addEventListener('click', () => {
     isOpen = !isOpen;
     toggleBtn.classList.toggle('active', isOpen);
@@ -782,9 +710,9 @@
     if (isAnalysisOpen) renderWordCloud();
   });
 
-  // ════════════════════════════════════════════════════════════════
+  // =================================================================
   // Auto Scroll
-  // ════════════════════════════════════════════════════════════════
+  // =================================================================
   function findScrollContainer() {
     const anchor = document.querySelector('[data-e2e="comment-item"]') || document.querySelector('[data-e2e="comment-level-1"]');
     if (anchor) {
@@ -851,9 +779,9 @@
     }, delay);
   }
 
-  // ════════════════════════════════════════════════════════════════
+  // =================================================================
   // Helpers
-  // ════════════════════════════════════════════════════════════════
+  // =================================================================
   function getCommentCountFromDOM() {
     const el = document.querySelector('[data-e2e="comment-count"]');
     if (el) {
@@ -922,9 +850,9 @@
     totalC.textContent = totalCommentsOnServer > 0 ? totalCommentsOnServer : '-';
   }
 
-  // ════════════════════════════════════════════════════════════════
+  // =================================================================
   // Word Cloud
-  // ════════════════════════════════════════════════════════════════
+  // =================================================================
   const STOP = new Set(['the','and','for','are','but','not','you','all','can','her','was','one','our','out','day','get','has','him','his','how','its','use','into','with','that','this','from','they','have','more','been','will','would','there','their','what','when','which','then','than','some','just','also','were','like','had','she','they','who','said','each','make','may','much','any','way','about','over','after','come','could','well','also','back','other','many','then','do','go','no','so','ve','bir','de','da','bu','ne','en','için','ama','çok','ile','ki','her','o','ya','mi','mı','mu','mü','ben','sen','biz','yok','var','daha','gibi','olan','olarak','şey','değil','nasıl','neden','şimdi']);
 
   function renderWordCloud() {
@@ -948,9 +876,9 @@
     });
   }
 
-  // ════════════════════════════════════════════════════════════════
+  // =================================================================
   // Render Results
-  // ════════════════════════════════════════════════════════════════
+  // =================================================================
   function renderResults() {
     const q = searchInput.value.trim().toLowerCase();
     let arr = Array.from(commentsMap.values());
@@ -1013,29 +941,92 @@
     });
   }
 
-  // ════════════════════════════════════════════════════════════════
-  // Scroll To Comment
-  // ════════════════════════════════════════════════════════════════
-  function scrollToComment(c) {
+  // =================================================================
+  // Scroll To Comment (Smart Scroll-Search in Virtual DOM)
+  // =================================================================
+  async function scrollToComment(c) {
     const norm = c.text.trim().toLowerCase();
-    let found = null;
-    for (const el of document.querySelectorAll('p,span,div')) {
-      if (el.children.length) continue;
-      if ((el.textContent||'').trim().toLowerCase() !== norm) continue;
-      let p = el.parentElement, d = 0;
-      while (p && d < 8) {
-        if ((p.textContent||'').toLowerCase().includes(c.userUniqueId.toLowerCase()) || (p.textContent||'').toLowerCase().includes(c.userNickname.toLowerCase())) { found = p; break; }
-        p = p.parentElement; d++;
+    
+    function findInDOM() {
+      for (const el of document.querySelectorAll('p,span,div')) {
+        if (el.children.length) continue;
+        if ((el.textContent||'').trim().toLowerCase() !== norm) continue;
+        let p = el.parentElement, d = 0;
+        while (p && d < 8) {
+          if ((p.textContent||'').toLowerCase().includes(c.userUniqueId.toLowerCase()) || 
+              (p.textContent||'').toLowerCase().includes(c.userNickname.toLowerCase())) {
+            return p;
+          }
+          p = p.parentElement; d++;
+        }
       }
-      if (found) break;
+      return null;
     }
+
+    let found = findInDOM();
     if (found) {
-      found.scrollIntoView({ behavior:'smooth', block:'center' });
-      const orig = found.style.backgroundColor;
-      found.style.transition = 'background-color .4s ease';
-      found.style.backgroundColor = 'rgba(0,242,254,.25)';
-      setTimeout(() => { found.style.backgroundColor = orig; setTimeout(() => { found.style.transition = ''; }, 400); }, 1200);
+      highlightAndScroll(found);
+      return;
+    }
+
+    const container = findScrollContainer();
+    if (!container) {
+      showError();
+      return;
+    }
+
+    const originalScrollTop = container.scrollTop;
+    const origPlaceholder = searchInput.placeholder;
+    searchInput.placeholder = t('locatingComment');
+    searchInput.classList.add('locating');
+
+    let attempts = 0;
+    while (!found && attempts < 35) {
+      container.scrollTop += 450;
+      await new Promise(r => setTimeout(r, 60));
+      found = findInDOM();
+      attempts++;
+      if (container.scrollTop + container.clientHeight >= container.scrollHeight) {
+        break;
+      }
+    }
+
+    // Try scrolling to top first if not found, just in case it was above
+    if (!found) {
+      container.scrollTop = 0;
+      await new Promise(r => setTimeout(r, 60));
+      found = findInDOM();
+      attempts = 0;
+      while (!found && attempts < 25) {
+        container.scrollTop += 450;
+        await new Promise(r => setTimeout(r, 60));
+        found = findInDOM();
+        attempts++;
+        if (container.scrollTop + container.clientHeight >= container.scrollHeight) {
+          break;
+        }
+      }
+    }
+
+    searchInput.placeholder = origPlaceholder;
+    searchInput.classList.remove('locating');
+
+    if (found) {
+      highlightAndScroll(found);
     } else {
+      container.scrollTop = originalScrollTop;
+      showError();
+    }
+
+    function highlightAndScroll(el) {
+      el.scrollIntoView({ behavior:'smooth', block:'center' });
+      const orig = el.style.backgroundColor;
+      el.style.transition = 'background-color .4s ease';
+      el.style.backgroundColor = 'rgba(0,242,254,.25)';
+      setTimeout(() => { el.style.backgroundColor = orig; setTimeout(() => { el.style.transition = ''; }, 400); }, 1200);
+    }
+
+    function showError() {
       const orig = searchInput.placeholder;
       searchInput.placeholder = t('notFoundInPage');
       searchInput.classList.add('error');
@@ -1043,9 +1034,9 @@
     }
   }
 
-  // ════════════════════════════════════════════════════════════════
+  // =================================================================
   // Incoming comment data from inject.js
-  // ════════════════════════════════════════════════════════════════
+  // =================================================================
   window.addEventListener('TikTokCommentSearcher_Data', e => {
     const { url, data } = e.detail;
     if (data) {
